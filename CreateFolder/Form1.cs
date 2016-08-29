@@ -8,21 +8,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Ookii.Dialogs;
+//using System.Reflection;
 
 namespace CreateFolder
 {
     public partial class Form1 : Form
     {
+
+
         string path;
         string fullPath;
 
         public Form1()
         {
             InitializeComponent();
+            //var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            //this.Text = String.Format("My Application Version {0}", version);
+            string version = Application.ProductVersion;
+            this.Text = String.Format("Application Version {0}", version);
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        // default folderbrowserdialog
+        /*private void button1_Click(object sender, EventArgs e)
         {
+
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             fbd.RootFolder = Environment.SpecialFolder.Desktop;
             fbd.Description = "Select folder";
@@ -31,6 +40,23 @@ namespace CreateFolder
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                 textBox1.Text = fbd.SelectedPath;
+
+            }
+
+        }
+        */
+        //using Ookii
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            VistaFolderBrowserDialog vfbd = new VistaFolderBrowserDialog();
+            vfbd.RootFolder = Environment.SpecialFolder.Desktop;
+            vfbd.Description = "Select folder";
+            vfbd.ShowNewFolderButton = true;
+
+            if (vfbd.ShowDialog() == DialogResult.OK)
+            {
+                textBox1.Text = vfbd.SelectedPath;
 
             }
 
